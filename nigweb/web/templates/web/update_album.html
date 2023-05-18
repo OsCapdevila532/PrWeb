@@ -1,0 +1,20 @@
+{% block content %}
+  <h1>Update Album</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+  </form>
+{% endblock %}
+
+
+
+
+<!-- {% block content %}
+  <h1>{% if id %} Update Album {% else %} Create Album {% endif %} Post</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+  </form>
+{% endblock %} -->

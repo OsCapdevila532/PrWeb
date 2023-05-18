@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  nigweb:
+    image: nigweb
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - db 
+
+  migration:
+      image: nigweb:latest
+      command: ["./wait-for-it.sh"]
+      env_file:
+        - .env
+      links:
+        - db
+      depends_on:
+        - nigweb
+  
+  proxy:
+    build: 
+      context: ./nginx
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80
+      - 1889:1889
+    depends_on: 
+     - nigweb
+
+
+
+
+volumes:
+  postgres_data:

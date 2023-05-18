@@ -1,0 +1,31 @@
+# fly.toml file generated for nigweb on 2023-04-07T17:53:38+02:00
+
+app = "nigweb"
+kill_signal = "SIGINT"
+kill_timeout = 5
+mounts = []
+primary_region = "mad"
+processes = []
+
+[deploy]
+
+[env]
+  PORT = "6969"
+
+[[services]]
+  internal_port = 6969
+  processes = ["app"]
+  protocol = "tcp"
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+[[statics]]
+  guest_path = "/code/static"
+  url_prefix = "/static/"

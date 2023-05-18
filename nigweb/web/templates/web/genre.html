@@ -1,0 +1,12 @@
+<h1>Genres</h1>
+<p>Hola profe</p>
+
+{% for genre in genre_list %}
+    <strong>{{ genre.genre }}</strong>
+
+{% endfor %}
+<br>
+<br>
+<br>
+<li><a href={% url 'create_genre' %}> Crear genere </li></a>
+<li><a href={% url 'Principal' %}> Index </li></a>

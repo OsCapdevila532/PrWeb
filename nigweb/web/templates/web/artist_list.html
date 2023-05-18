@@ -1,0 +1,22 @@
+
+{% block content %}
+    <h1>Artists</h1>
+
+{% for artist in artist_list %}
+    <strong>{{ artist.name }}</strong>
+    <ul>
+        <li>{{album.artist}}</li>
+        <!--    
+        <li>Songs: </li>
+            <ul>
+            {% for song in artist.songs.all %}
+                <li>{{song.title}}</li>
+            {% endfor %}
+            </ul> 
+        -->
+    </ul>
+{% endfor %}
+    <br>
+    <li><a href={% url 'create_artist' %}> Crear artista </li></a>
+    <li><a href={% url 'Principal' %}> Index </li></a>
+{% endblock %}

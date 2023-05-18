@@ -1,0 +1,11 @@
+<body>
+    <h1>Regsitration</h1>
+    <form action=". " method="POST">
+        {% csrf_token %}
+        {{form}}
+        <!-- <input type="text" name="username" placeholder="Username" />
+        <input type="password" name="password" placeholder="Password" /> -->
+        <button type="submit" > Register </button>
+
+    </form>
+</body>
