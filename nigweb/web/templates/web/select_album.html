@@ -1,0 +1,9 @@
+{% block content %}
+
+<h1>{{album}}</h1>
+
+<button onclick="window.location.href='/albums/{{album}}/delete'"> Delete Album </button>
+<button onclick="window.location.href='/albums/{{album}}/update'"> Update Album </button>
+<br>
+<a href="javascript:history.back()">Go back</a>
+{% endblock %}

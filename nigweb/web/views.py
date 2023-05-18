@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from web.models import Song, Album, Artist, Genre
 from nigweb.forms import *
 
+#renders de llistes i tal
 def principal(request):
     return render(request, 'web/index.html')
 
@@ -35,15 +36,18 @@ def create_genre(request):
     if form.is_valid():
 
         form.save()
-        return render(request, 'web/index.html')
+        genre_list = Genre.objects.all()
+        return render(request, 'web/genre.html', {'genre_list':genre_list})
     return render(request, 'web/create_genre.html', {'form':form})
-        
+
+#renders per crear instancies al model
 def create_artist(request):
     form = createArtistForm(request.POST)
     if form.is_valid():
 
         form.save()
-        return render(request, 'web/index.html')
+        artist_list = Artist.objects.all()
+        return render(request, 'web/artist_list.html', {'artist_list':artist_list})
     return render(request, 'web/create_artist.html', {'form':form})
 
 def create_album(request):
@@ -53,7 +57,8 @@ def create_album(request):
 
         Artist.objects.filter(name=form.instance.artist)
         form.save()
-        return render(request, 'web/index.html')
+        album_list = Album.objects.all()
+        return render(request, 'web/album_list.html', {'album_list':album_list})
     return render(request, 'web/create_album.html', {'form':form})
 
 def create_song(request):
@@ -62,160 +67,87 @@ def create_song(request):
     if form.is_valid():
 
         Genre.objects.filter(genre=form.instance.genre)
-        Album.objects.filter(album=form.instance.album)
+        Album.objects.filter(title=form.instance.albums)
         form.save()
-        return render(request, 'web/index.html')
+        song_list = Song.objects.all()
+        return render(request, 'web/song_list.html',{'song_list':song_list})
     return render(request, 'web/create_song.html', {'form':form})
 
-#?
-from django.shortcuts import (get_object_or_404, HttpResponseRedirect)
+#renders per seleccionar instancies al model
+def select_artist(request, name):
+    obj = get_object_or_404(Artist.objects.all(), name = name)
+    return render(request, "web/select_artist.html", {"artist": obj.name})
 
-def update_genre(request, id):
-    obj = get_object_or_404(Genre, id = id)
-    form = updateGenreForm(request.POST or None, instance = obj)
+def select_album(request, title):
+    obj = get_object_or_404(Album.objects.all(), title = title)
+    return render(request, "web/select_album.html", {"album": obj.title})
 
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect("/"+id)
-        #return render(request, 'web/index.html')
-    return render(request, 'web/update_genre.html', {'form':form})
+def select_song(request, title):
+    obj = get_object_or_404(Song.objects.all(), title = title)
+    return render(request, "web/select_song.html", {"song": obj.title})
 
-def update_artist(request, id):
-    obj = get_object_or_404(Artist, id = id)
+#renders per crear updatejar al model
+def update_artist(request, name):
+    obj = get_object_or_404(Artist, name = name)
     form = updateArtistForm(request.POST or None, instance = obj)
 
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect("/"+id)
-        #return render(request, 'web/index.html')
+        artist_list = Artist.objects.all()
+        return render(request, 'web/artist_list.html', {'artist_list':artist_list})
     return render(request, 'web/update_artist.html', {'form':form})
 
-def update_album(request, id):
-    obj = get_object_or_404(Album, id = id)
+def update_album(request, title):
+    obj = get_object_or_404(Album, title = title)
     form = updateAlbumForm(request.POST or None, instance = obj)
 
     if form.is_valid():
-        #Artist.objects.filter(name=form.instance.artist)
         form.save()
-        return HttpResponseRedirect("/"+id)
-        #return render(request, 'web/index.html')
+        album_list = Album.objects.all()
+        return render(request, 'web/album_list.html', {'album_list':album_list})
     return render(request, 'web/update_album.html', {'form':form})
 
-def update_song(request, id):
-    obj = get_object_or_404(Song, id = id)
+def update_song(request, title):
+    obj = get_object_or_404(Song, title = title)
     form = updateSongForm(request.POST or None, instance = obj)
 
     if form.is_valid():
-        #Genre.objects.filter(genre=form.instance.genre)
-        #Album.objects.filter(album=form.instance.album)
         form.save()
-        return HttpResponseRedirect("/"+id)
-        #return render(request, 'web/index.html')
+        song_list = Song.objects.all()
+        return render(request, 'web/song_list.html',{'song_list':song_list})
     return render(request, 'web/update_song.html', {'form':form})
 
-def delete_genre(request, id):
-    obj = get_object_or_404(Genre, id = id)
+#renders per borrar instancies al model
+def delete_genre(request, genre):
+    obj = get_object_or_404(Genre, genre = genre)
     if request.method =="POST":
         obj.delete()
-        return HttpResponseRedirect("/")
-        #return render(request, 'web/index.html')
- 
-    return render(request, "deleteGenre.html")
+        genre_list = Genre.objects.all()
+        return render(request, 'web/genre.html', {'genre_list':genre_list})
+    return render(request, "web/delete_genre.html")
 
-def delete_artist(request, id):
-    obj = get_object_or_404(Artist, id = id)
+def delete_artist(request, name):
+    obj = get_object_or_404(Artist, name = name)
     if request.method =="POST":
         obj.delete()
-        return HttpResponseRedirect("/")
-        #return render(request, 'web/index.html')
+        artist_list = Artist.objects.all()
+        return render(request, 'web/artist_list.html', {'artist_list':artist_list})
  
-    return render(request, "deleteArtist.html")
+    return render(request, "web/delete_artist.html")
 
-def delete_album(request, id):
-    obj = get_object_or_404(Album, id = id)
+def delete_album(request, title):
+    obj = get_object_or_404(Album, title = title)
     if request.method =="POST":
         obj.delete()
-        return HttpResponseRedirect("/")
-        #return render(request, 'web/index.html')
+        album_list = Album.objects.all()
+        return render(request, 'web/album_list.html', {'album_list':album_list})
  
-    return render(request, "deleteAlbum.html")
+    return render(request, "web/delete_album.html")
 
-def delete_song(request, id):
-    obj = get_object_or_404(Song, id = id)
+def delete_song(request, title):
+    obj = get_object_or_404(Song, title = title)
     if request.method =="POST":
         obj.delete()
-        return HttpResponseRedirect("/")
-        #return render(request, 'web/index.html')
- 
-    return render(request, "deleteSong.html")
-
-# class ArtistCreateView(CreateView):
-#     model = Artist
-#     fields = ['name', 'genres']
-#     template_name = 'create_artist.html'
-#     success_url = '/'
-
-# class AlbumCreateView(CreateView):
-#     model = Album
-#     fields = ['title', 'artist', 'genres']
-#     template_name = 'create_album.html'
-#     success_url = '/'
-
-# class SongCreateView(CreateView):
-#     model = Song
-#     fields = ['title', 'release_date', 'genre', 'albums', 'artists']
-#     template_name = 'create_song.html'
-#     success_url = '/'
-
-
-# def get_queryset(self):         #Login per update i delete
-#         qs = super().get_queryset()
-#         return qs.filter(user=self.request.user)
-
-
-# class GenreUpdateView(LoginRequiredMixin, UpdateView):
-#     model = Genre
-#     fields = ['genre']
-#     template_name = 'update_genre.html'
-#     success_url = '/'
-
-# class GenreDeleteView(LoginRequiredMixin, DeleteView):
-#     model = Genre
-#     template_name = 'delete_genre.html'
-#     success_url = '/'
-
-
-# class ArtistUpdateView(LoginRequiredMixin, UpdateView):
-#     model = Artist
-#     fields = ['artist']
-#     template_name = 'update_artist.html'
-#     success_url = '/'
-
-# class ArtistDeleteView(LoginRequiredMixin, DeleteView):
-#     model = Artist
-#     template_name = 'delete_artist.html'
-#     success_url = '/'
-
-
-# class AlbumUpdateView(LoginRequiredMixin, UpdateView):
-#     model = Album
-#     fields = ['album']
-#     template_name = 'update_album.html'
-#     success_url = '/'
-
-# class AlbumDeleteView(LoginRequiredMixin, DeleteView):
-#     model = Album
-#     template_name = 'delete_album.html'
-#     success_url = '/'
-
-
-# class SongUpdateView(LoginRequiredMixin, UpdateView):
-#     model = Song
-#     fields = ['song']
-#     template_name = 'update_song.html'
-#     success_url = '/'
-
-# class SongDeleteView(LoginRequiredMixin, DeleteView):
-#     model = Song
-#     template_name = 'delete_song.html'
-#     success_url = '/'
+        song_list = Song.objects.all()
+        return render(request, 'web/song_list.html',{'song_list':song_list})
+    return render(request, "web/delete_song.html")

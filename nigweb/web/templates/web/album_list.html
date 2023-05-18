@@ -3,22 +3,7 @@
     <h1>Albums</h1>
 
 {% for album in album_list %}
-    <strong>{{ album.title }}</strong>
-    <ul>
-        <li>{{album.artist}}</li>
-        {% for genre in album.genres.all %}
-            <li>{{genre.genre}}</li>
-        {% endfor %}
-        <!--
-            <li>Songs: </li>
-            <ul>
-            {% for song in album.songs.all %}
-                <li>{{song.title}}</li>
-            {% endfor %}
-            </ul>
-        -->
-
-    </ul>
+    <button onclick="window.location.href='/albums/{{ album.title }}'">{{album.title}}</button>
 {% endfor %}
     <br>
     <li><a href={% url 'create_album' %}> Crear album </li></a>

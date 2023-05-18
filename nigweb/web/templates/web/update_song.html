@@ -2,19 +2,7 @@
   <h1>Update Song</h1>
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form }}
     <button type="submit">Update</button>
   </form>
 {% endblock %}
-
-
-
-
-<!-- {% block content %}
-  <h1>{% if id %} Update Song {% else %} Create Song {% endif %} Post</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Update</button>
-  </form>
-{% endblock %} -->

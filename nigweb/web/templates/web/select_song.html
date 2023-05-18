@@ -1,0 +1,9 @@
+{% block content %}
+
+<h1>{{song}}</h1>
+
+<button onclick="window.location.href='/songs/{{song}}/delete'"> Delete Song </button>
+<button onclick="window.location.href='/songs/{{song}}/update'"> Update Song </button>
+<br>
+<a href="javascript:history.back()">Go back</a>
+{% endblock %}

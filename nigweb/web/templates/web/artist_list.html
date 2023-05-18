@@ -3,18 +3,7 @@
     <h1>Artists</h1>
 
 {% for artist in artist_list %}
-    <strong>{{ artist.name }}</strong>
-    <ul>
-        <li>{{album.artist}}</li>
-        <!--    
-        <li>Songs: </li>
-            <ul>
-            {% for song in artist.songs.all %}
-                <li>{{song.title}}</li>
-            {% endfor %}
-            </ul> 
-        -->
-    </ul>
+    <button onclick="window.location.href='/artists/{{ artist.name }}'">{{artist.name}}</button>
 {% endfor %}
     <br>
     <li><a href={% url 'create_artist' %}> Crear artista </li></a>

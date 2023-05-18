@@ -2,11 +2,8 @@
 <p>Hola profe</p>
 
 {% for genre in genre_list %}
-    <strong>{{ genre.genre }}</strong>
-
+    <button onclick="window.location.href='/genres/{{ genre.genre }}'">{{genre.genre}}</button>
 {% endfor %}
-<br>
-<br>
 <br>
 <li><a href={% url 'create_genre' %}> Crear genere </li></a>
 <li><a href={% url 'Principal' %}> Index </li></a>

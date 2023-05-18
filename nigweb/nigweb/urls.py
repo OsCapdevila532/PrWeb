@@ -26,29 +26,24 @@ urlpatterns = [
     path('artists/', wv.all_artists, name="artists"),
     path('genres/', wv.all_genres, name="genres"),
 
+    path('artists/<str:name>', wv.select_artist, name="select_artist"),
+    path('albums/<str:title>', wv.select_album, name="select_album"),
+    path('songs/<str:title>', wv.select_song, name="select_song"),
+
     path('genres/create_genre/', wv.create_genre, name='create_genre'),
     path('artists/create_artist/', wv.create_artist, name='create_artist'),
     path('albums/create_album/', wv.create_album, name='create_album'),
+    
     path('songs/create_song/', wv.create_song, name='create_song'),
 
-    path('genre/update/', wv.update_genre, name='update_genre'),
-    path('artist/update/', wv.update_artist, name='update_artist'),
-    path('album/update/', wv.update_album, name='upate_album'),
-    path('song/update/', wv.update_song, name='update_song'),
+    path('artists/<str:name>/update/', wv.update_artist, name='update_artist'),
+    path('albums/<str:title>/update/', wv.update_album, name='upate_album'),
+    path('songs/<str:title>/update/', wv.update_song, name='update_song'),
 
-    path('genre/delete/', wv.delete_genre, name='delete_genre'),
-    path('artist/delete/', wv.delete_artist, name='delete_artist'),
-    path('album/delete/', wv.delete_album, name='delete_album'),
-    path('song/delete/', wv.delete_song, name='delete_song'),
+    path('genres/<str:genre>/', wv.delete_genre, name='delete_genre'),
+    path('artists/<str:name>/delete/', wv.delete_artist, name='delete_artist'),
+    path('albums/<str:title>/delete/', wv.delete_album, name='delete_album'),
+    
+    path('songs/<str:title>/delete/', wv.delete_song, name='delete_song'),
 
-
-    #path('genre/update/', wv.GenreUpdateView.as_view(), name='update_genre'),
-    #path('artist/update/', wv.ArtistUpdateView.as_view(), name='update_artist'),
-    #path('album/update/', wv.AlbumUpdateView.as_view(), name='upate_album'),
-    #path('song/update/', wv.SongUpdateView.as_view(), name='update_song'),
-
-    #path('genre/delete/', wv.GenreDeleteView.as_view(), name='delete_genre'),
-    #path('artist/delete/', wv.ArtistDeleteView.as_view(), name='delete_artist'),
-    #path('album/delete/', wv.AlbumDeleteView.as_view(), name='delete_album'),
-    #path('song/delete/', wv.SongDeleteView.as_view(), name='delete_song'),
 ]

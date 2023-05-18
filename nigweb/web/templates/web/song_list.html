@@ -3,6 +3,14 @@
     <h1>Song</h1>
 
 {% for song in song_list %}
+    <button onclick="window.location.href='/songs/{{ song.title }}'">{{song.title}}</button>
+{% endfor %}
+    <br>
+    <li><a href={% url 'create_song' %}> Crear song </li></a>
+    <li><a href={% url 'Principal' %}> Index </li></a>
+{% endblock %}
+
+<!--
     <strong>{{ song.title }}</strong>
     <ul>
         <li>{{song.release_date}}</li>
@@ -16,8 +24,4 @@
             {% endfor %}
             </ul>
     </ul>
-{% endfor %}
-    <br>
-    <li><a href={% url 'create_song' %}> Crear song </li></a>
-    <li><a href={% url 'Principal' %}> Index </li></a>
-{% endblock %}
+-->

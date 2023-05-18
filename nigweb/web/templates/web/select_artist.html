@@ -1,0 +1,16 @@
+{% block content %}
+
+<h1>{{artist}}</h1>
+<!-- 
+    Aqui artist es Artist.name que tenim als models, hauriem de pasar el artista com a tal al render de les views, canviar {{artist}} per
+    {{artist.name}} i aixi podem fer artist.algo per aqui i imprimir els seus camps per veure(per song_list hi ha algun exemple crec). 
+    S'hauria de fer lo mateix a les altres de select que estic fent ara i ho fare aixi cutre com esta. Keep in mind que als altres podria 
+    ser tipo Album.title, neu mirant els models.
+    Tmb algo a fer seria mirar que els "prints" de html o estiguin tots en angles o catala (yo ficaria angles i ale).
+-->
+
+<button onclick="window.location.href='/artists/{{artist}}/delete'"> Delete Artist </button>
+<button onclick="window.location.href='/artists/{{artist}}/update'"> Update Artist </button>
+<br>
+<a href="javascript:history.back()">Go back</a>
+{% endblock %}
