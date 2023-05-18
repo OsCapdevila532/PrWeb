@@ -31,10 +31,10 @@ urlpatterns = [
     path('albums/create_album/', wv.create_album, name='create_album'),
     path('songs/create_song/', wv.create_song, name='create_song'),
 
-    # path('genre/update/', wv.GenreUpdateView.as_view(), name='update_genre'),
-    # path('artist/update/', wv.ArtistUpdateView.as_view(), name='update_artist'),
-    # path('album/update/', wv.AlbumUpdateView.as_view(), name='upate_album'),
-    # path('song/update/', wv.SongUpdateView.as_view(), name='update_song'),
+    path('genre/update/', wv.GenreUpdateView.as_view(), name='update_genre'),
+    path('artist/update/', wv.ArtistUpdateView.as_view(), name='update_artist'),
+    path('album/update/', wv.AlbumUpdateView.as_view(), name='upate_album'),
+    path('song/update/', wv.SongUpdateView.as_view(), name='update_song'),
 
     # path('genre/delete/', wv.GenreDeleteView.as_view(), name='delete_genre'),
     # path('artist/delete/', wv.ArtistDeleteView.as_view(), name='delete_artist'),
