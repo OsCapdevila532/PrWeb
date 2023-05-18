@@ -36,19 +36,19 @@ urlpatterns = [
     path('album/update/', wv.update_album, name='upate_album'),
     path('song/update/', wv.update_song, name='update_song'),
 
-    path('genre/update/', wv.delete_genre, name='update_genre'),
-    path('artist/update/', wv.delete_artist, name='update_artist'),
-    path('album/update/', wv.delete_album, name='upate_album'),
-    path('song/update/', wv.delete_song, name='update_song'),
+    path('genre/delete/', wv.delete_genre, name='delete_genre'),
+    path('artist/delete/', wv.delete_artist, name='delete_artist'),
+    path('album/delete/', wv.delete_album, name='delete_album'),
+    path('song/delete/', wv.delete_song, name='delete_song'),
 
 
-    """ path('genre/update/', wv.GenreUpdateView.as_view(), name='update_genre'),
-    path('artist/update/', wv.ArtistUpdateView.as_view(), name='update_artist'),
-    path('album/update/', wv.AlbumUpdateView.as_view(), name='upate_album'),
-    path('song/update/', wv.SongUpdateView.as_view(), name='update_song'),
+    #path('genre/update/', wv.GenreUpdateView.as_view(), name='update_genre'),
+    #path('artist/update/', wv.ArtistUpdateView.as_view(), name='update_artist'),
+    #path('album/update/', wv.AlbumUpdateView.as_view(), name='upate_album'),
+    #path('song/update/', wv.SongUpdateView.as_view(), name='update_song'),
 
-    path('genre/delete/', wv.GenreDeleteView.as_view(), name='delete_genre'),
-    path('artist/delete/', wv.ArtistDeleteView.as_view(), name='delete_artist'),
-    path('album/delete/', wv.AlbumDeleteView.as_view(), name='delete_album'),
-    path('song/delete/', wv.SongDeleteView.as_view(), name='delete_song'), """
+    #path('genre/delete/', wv.GenreDeleteView.as_view(), name='delete_genre'),
+    #path('artist/delete/', wv.ArtistDeleteView.as_view(), name='delete_artist'),
+    #path('album/delete/', wv.AlbumDeleteView.as_view(), name='delete_album'),
+    #path('song/delete/', wv.SongDeleteView.as_view(), name='delete_song'),
 ]
