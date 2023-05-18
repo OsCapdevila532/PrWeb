@@ -8,10 +8,12 @@ class createGenreForm(forms.ModelForm):
         fields = ['genre']
 
 class createArtistForm(forms.ModelForm):
-    
+
     class Meta:
         model = Artist
-        fields = ['name', 'genres']
+        name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Name', 'style': 'width: 300px;', 'class': 'form-control'}))
+        genres = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Genre', 'style': 'width: 300px;', 'class': 'form-control'}))
+        #fields = ['name', 'genres']
     genres = forms.ModelMultipleChoiceField(queryset=Genre.objects.all(), widget=forms.CheckboxSelectMultiple)
     
 class createAlbumForm(forms.ModelForm):
