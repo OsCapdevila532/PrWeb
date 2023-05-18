@@ -29,7 +29,7 @@ class createSongForm(forms.ModelForm):
     release_date = forms.DateField()
     artists = forms.ModelMultipleChoiceField(queryset=Artist.objects.all(), widget=forms.CheckboxSelectMultiple)
 
-#?
+### ?
 class updateGenreForm(forms.ModelForm):
     
     class Meta:
@@ -58,3 +58,31 @@ class updateSongForm(forms.ModelForm):
     release_date = forms.DateField()
     artists = forms.ModelMultipleChoiceField(queryset=Artist.objects.all(), widget=forms.CheckboxSelectMultiple)
 
+class deleteGenreForm(forms.ModelForm):
+    
+    class Meta:
+        model = Genre
+        fields = ['genre']
+
+class deleteArtistForm(forms.ModelForm):
+    
+    class Meta:
+        model = Artist
+        fields = ['name', 'genres']
+    genres = forms.ModelMultipleChoiceField(queryset=Genre.objects.all(), widget=forms.CheckboxSelectMultiple)
+
+class deleteAlbumForm(forms.ModelForm):
+    
+    class Meta:
+        model = Album
+        fields = ['title', 'genres', 'artist']
+    genres = forms.ModelMultipleChoiceField(queryset=Genre.objects.all(), widget=forms.CheckboxSelectMultiple)
+
+class deleteSongForm(forms.ModelForm):
+    
+    class Meta:
+        model = Song
+        fields = ['title', 'release_date', 'genre', 'albums', 'artists']
+    release_date = forms.DateField()
+    artists = forms.ModelMultipleChoiceField(queryset=Artist.objects.all(), widget=forms.CheckboxSelectMultiple)
+### ?

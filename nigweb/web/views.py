@@ -113,6 +113,41 @@ def update_song(request, id):
         #return render(request, 'web/index.html')
     return render(request, 'web/update_song.html', {'form':form})
 
+def delete_genre(request, id):
+    obj = get_object_or_404(Genre, id = id)
+    if request.method =="POST":
+        obj.delete()
+        return HttpResponseRedirect("/")
+        #return render(request, 'web/index.html')
+ 
+    return render(request, "deleteGenre.html")
+
+def delete_artist(request, id):
+    obj = get_object_or_404(Artist, id = id)
+    if request.method =="POST":
+        obj.delete()
+        return HttpResponseRedirect("/")
+        #return render(request, 'web/index.html')
+ 
+    return render(request, "deleteArtist.html")
+
+def delete_album(request, id):
+    obj = get_object_or_404(Album, id = id)
+    if request.method =="POST":
+        obj.delete()
+        return HttpResponseRedirect("/")
+        #return render(request, 'web/index.html')
+ 
+    return render(request, "deleteAlbum.html")
+
+def delete_song(request, id):
+    obj = get_object_or_404(Song, id = id)
+    if request.method =="POST":
+        obj.delete()
+        return HttpResponseRedirect("/")
+        #return render(request, 'web/index.html')
+ 
+    return render(request, "deleteSong.html")
 
 # class ArtistCreateView(CreateView):
 #     model = Artist
